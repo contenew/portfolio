@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hiroyuki Hayashi – Product Manager Portfolio</title>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
+      background: rgba(0, 0, 0, 0);
+      color: #eee;
+    }
+
+    #background-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+    }
+
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 6vw 10rem;
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #fff;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #fff;
+      margin: 2em 0 1em;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    section {
+      background: rgba(20, 20, 20, 0);
+      backdrop-filter: blur(1px);
+      padding: 2rem;
+    }
+    /* Skills list */
+    #skills ul{margin-left:0;padding-left:0;list-style-position:inside;}
+
+    .card {
+      background: rgba(20, 20, 20, 0.8);
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card h3 {
+      color: #fff;
+      margin: 0 0 0.5rem;
+    }
+
+    .card p {
+      color: #ccc;
+      font-size: 0.95rem;
+      margin-bottom: 0rem;
+    }
+
+    ul.timeline {
+      border-left: 1px solid #333;
+      padding-left: 1.5rem;
+      list-style: none;
+    }
+
+    ul.timeline li {
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    ul.timeline li::before {
+      content: "";
+      position: absolute;
+      left: -1.7rem;
+      top: 9px;
+      width: 6px;
+      height: 6px;
+      background: #333;
+      border-radius: 50%;
+    }
+
+    form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    input, textarea {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      color: #eee;
+      border-radius: 6px;
+      padding: 0.75rem;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #66c7ff;
+      border: none;
+      border-radius: 6px;
+      padding: 0.8rem 1.6rem;
+      color: #000;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #91d4ff;
+    }
+
+    .copyright {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: 2rem;
+    }
+    /* ---------- Skills タグデザイン ---------- */
+    #skills ul.tag-list{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:flex;
+      flex-wrap:wrap;
+      gap:.6rem;
+    }
+    #skills ul.tag-list li{
+      display:inline-block;
+      background: rgba(20, 20, 20, 0.8);
+      border: 1px solid #333;
+      border-radius:9999px;
+      padding:.35rem 1rem;
+      font-size:.85rem;
+      color:#fff;
+      white-space:nowrap;
+    }
+        /* ---------- Social links ---------- */
+        .social-links{
+      display:flex;
+      gap:1rem;
+      margin-top:1.2rem;
+    }
+    .social-links a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      background:#1a1a1a;
+      border:1px solid #333;
+      transition:background .3s, transform .3s;
+    }
+    .social-links a:hover{
+      background:#66c7ff;
+      transform:translateY(-2px);
+    }
+    .social-links svg{
+      width:24px;
+      height:24px;
+      fill:#eee;
+    }
+  </style>
+</head>
+<body>
+  <!-- 背景アニメーション -->
+  <div id="background-canvas"><div id="anim-holder"></div></div>
+  <div id="overlay"></div>
+
+  <!-- メインコンテンツ -->
+  <main>
+    <!-- Hero -->
+    <section id="hero">
+        <h1>Hiroyuki Hayashi</h1>
+        <p>Senior Product Manager with 10+ years orchestrating end‑to‑end product lifecycles—from vision and UX research to scalable growth. Passionate about AI‑driven content platforms, PLG strategies, and crafting data‑informed user experiences.</p>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+        <h2>Expertise</h2>
+        <ul class="tag-list">
+            <li>Product Strategy</li>
+            <li>AI‑powered Content & UX Automation</li>
+            <li>Growth Loops & PLG</li>
+            <li>Service Design</li>
+
+        </ul>
+    </section>
+    <section>
+      <h2>Selected Projects</h2>
+      <div class="card">
+        <h3>AI Writing Suite</h3>
+        <p>Automated transcription → outline → draft workflow adopted by 1,200+ enterprise customers; reduced editorial turnaround by 60%.</p>
+      </div>
+      <div class="card">
+        <h3>PLG Onboarding Revamp</h3>
+        <p>Redesigned freemium activation flows, driving +35% retention and +48% upgrade rate within 90 days.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Career Highlights</h2>
+      <ul class="timeline">
+        <li><strong>2023 — Present</strong> Senior PM, Freelance etc</li>
+        <li><strong>2018 — 2023</strong> B2B SaaS & Media Senir PM</li>
+        <li><strong>2005 — 2018</strong> UX Designer, Product Owner for job seeker</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Let’s Connect</h2>
+      <p>Interested in collaboration or just want to say hi? Drop a line below — I’m always eager to chat about all things product, growth, and AI.</p>
+      <div class="social-links">
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/contenew" target="_blank" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M22 12.073C22 6.504 17.523 2 12 2S2 6.504 2 12.073c0 4.996 3.657 9.128 8.438 9.88v-6.993H7.898v-2.887h2.54V9.845c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.465h-1.26c-1.243 0-1.63.773-1.63 1.566v1.881h2.773l-.443 2.887h-2.33V22c4.781-.752 8.438-4.884 8.438-9.927z"/>
+          </svg>
+        </a>
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/hiroyuki-hayashi-b0375844/" target="_blank" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M22.46 0H1.54C.69 0 0 .69 0 1.54v20.92C0 23.31.69 24 1.54 24h20.92C23.31 24 24 23.31 24 22.46V1.54C24 .69 23.31 0 22.46 0zM7.53 20H4.26V8.98h3.27V20zm-1.64-12.7c-1.05 0-1.9-.86-1.9-1.92 0-1.06.85-1.92 1.9-1.92s1.9.86 1.9 1.92c0 1.06-.85 1.92-1.9 1.92zm14.81 12.7h-3.27v-5.6c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.95V20h-3.26V8.98h3.13v1.52h.05c.44-.83 1.52-1.7 3.13-1.7 3.35 0 3.97 2.2 3.97 5.06V20z"/>
+          </svg>
+        </a>
+      </div>
+      <div class="copyright">© 2025 Hiroyuki Hayashi. All rights reserved.</div>
+    </section>
+  </main>
+
+  <!-- アニメーションコード -->
+  <script>
+    const POINTS = 50000;
+    const SPEED = Math.PI / 20;
+    const STROKE_COL = [255, 150, 0, 110];
+    let t = 0, center;
+
+    new p5(p => {
+      p.setup = () => {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        p.createCanvas(w, h).parent('anim-holder');
+        center = w / 2;
+        p.stroke(...STROKE_COL);
+        p.noFill();
+      };
+
+      function a(x, y) {
+        const k = x / 8 - 12;
+        const e = y / 13 - 14;
+        const o = p.sqrt(k * k + e * e);
+        const d = 5 * p.cos(o / 2);
+        const q = x / 2 + 10 + 1 / k + k * p.cos(e) * p.sin(d * 8 - t);
+        const c = d / 3 + t / 8;
+        const px = q * p.sin(c) + p.sin(d * 2 + t) * k + center;
+        const py = (y / 4 + 5 * o * o + q * p.cos(c * 3)) / 2 * p.cos(c) + p.height / 2;
+        p.point(px, py);
+      }
+
+      p.draw = () => {
+        p.background(6);
+        t += SPEED;
+        for (let i = 0; i < POINTS; i++) a(i % 200, (i / 200) | 0);
+      };
+
+      p.windowResized = () => {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        p.resizeCanvas(w, h);
+        center = w / 2;
+      };
+    });
+  </script>
+</body>
+</html>
